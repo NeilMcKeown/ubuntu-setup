@@ -1,4 +1,6 @@
 #!/bin/bash
+EMAIL=neilsimonmckeown@gmail.com
+
 
 ###################################################################################################
 # Update and Upgrade
@@ -49,12 +51,29 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt-get -f install
 
 ###################################################################################################
+# Generate a new SSH key
+###################################################################################################
+echo "Generating a new SSH key..."
+ssh-keygen -t rsa -b 4096 -C "${EMAIL}"
+
+###################################################################################################
+# Add the SSH key to the ssh-agent
+###################################################################################################
+echo "Adding the SSH key to the ssh-agent..."
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+echo "SSH key is below:"
+echo
+cat ~/.ssh/id_rsa.pub
+echo
+
+###################################################################################################
 # Install Intellij
 ###################################################################################################
 echo "Installing IntelliJ IDEA..."
 
 # We need root to install
-[ $(id -u) != "0" ] && exec sudo "$0" "$@"
+#[ $(id -u) != "0" ] && exec sudo "$0" "$@"
 
 # Prompt for edition
 while true; do
@@ -92,19 +111,18 @@ DIR="/opt/idea-I$ed-$VERSION"
 echo "Installing to $DIR"
 
 # Untar file
-if mkdir ${DIR}; then
-    tar -xzf ${DEST} -C ${DIR} --strip-components=1
+if sudo mkdir ${DIR}; then
+    sudo tar -xzf ${DEST} -C ${DIR} --strip-components=1
 fi
 
 # Grab executable folder
 BIN="$DIR/bin"
 
 # Add permissions to install directory
-chmod -R +rwx ${DIR}
+sudo chmod -R +rwx ${DIR}
 
 # Create symlink entry
-ln -sf ${BIN}/idea.sh /usr/local/bin/idea
-
-# TODO: Stop being root...
+sudo ln -sf ${BIN}/idea.sh /usr/local/bin/idea
 
 echo "Done."
+whoami
