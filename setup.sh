@@ -91,6 +91,9 @@ sudo apt-get purge lxc-docker
 
 sudo apt-get install -y docker-engine
 
+# Add the user to the docker group.
+sudo usermod -aG docker ${USER}
+
 sudo service docker start
 
 sudo docker run hello-world
