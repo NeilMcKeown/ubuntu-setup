@@ -1,7 +1,6 @@
 #!/bin/bash
 EMAIL=neilsimonmckeown@gmail.com
 
-
 ###################################################################################################
 # Update and Upgrade
 ###################################################################################################
@@ -35,12 +34,38 @@ echo "Installing Java..."
 sudo apt-get install openjdk-8-jdk
 
 ###################################################################################################
+# Install Node
+###################################################################################################
+cd ~
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+
+# The script clones the nvm repository to ~/.nvm and adds the source line to your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+###################################################################################################
 # Install Atom
 ###################################################################################################
 echo "Installing Atom..."
 sudo add-apt-repository ppa:webupd8team/atom
 sudo apt-get update
 sudo apt-get install atom
+
+###################################################################################################
+# Yarn
+###################################################################################################
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+sudo apt-get update && sudo apt-get install yarn
+
+###################################################################################################
+# Yeoman
+###################################################################################################
+yarn global add yo
+
+yarn global add generator-jhipster
 
 ###################################################################################################
 # Install Chrome
