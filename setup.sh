@@ -60,20 +60,16 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update
 sudo apt install yarn
-#curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-#echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-#sudo apt-get update && sudo apt-get install -y yarn
 
 echo "###################################################################################################"
 echo "# Installing Yeoman..."
 echo "###################################################################################################"
-#yarn global add yo
+yarn global add yo
 
 echo "###################################################################################################"
 echo "# Installing JHipster..."
 echo "###################################################################################################"
-#yarn global add generator-jhipster
+yarn global add generator-jhipster
 
 echo "###################################################################################################"
 echo "# Installing Cloud Foundry CLI..."
