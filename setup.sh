@@ -61,6 +61,11 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update
 sudo apt install yarn
 
+sed -i -e '$a export PATH=$PATH:`yarn global bin`:$HOME/.config/yarn/global/node_modules/.bin' ~/.zshrc
+
+sed -i -e '$a export PATH=$PATH:`yarn global bin`:$HOME/.config/yarn/global/node_modules/.bin' ~/.bashrc
+
+
 echo "###################################################################################################"
 echo "# Installing Yeoman..."
 echo "###################################################################################################"
